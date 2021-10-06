@@ -85,8 +85,12 @@ const moviesController = {
 
         Promise.all([moviePromise, genresPromise])
             .then(([Movie, allGenres]) => {
-                //return res.json(Movie);
-                res.render('moviesEdit', {Movie, allGenres});
+                let d = Movie.release_date;
+                let datestring = d.getFullYear().toString() + '-' +
+                                (d.getMonth()+1).toString().padStart(2, '0') + '-' +
+                                d.getDate().toString().padStart(2, '0');
+                console.log(datestring);
+                res.render('moviesEdit', {Movie, allGenres, datestring});
             })
             .catch((error) => {
                 console.log(error);
